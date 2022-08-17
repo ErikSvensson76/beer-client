@@ -12,5 +12,6 @@ import org.springframework.context.annotation.Configuration;
 public class WebClientProperties {
 
     private String baseUrl;
+    private String beerV1Path;
 
 }
