@@ -6,14 +6,12 @@ import com.example.beerclient.model.BeerCommand;
 import com.example.beerclient.model.BeerPagedList;
 import com.example.beerclient.model.BeerStyle;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import java.lang.reflect.Type;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -24,9 +22,16 @@ public class BeerClientImpl implements BeerClient {
     private final WebClientProperties properties;
 
     @Override
-    public Mono<BeerPagedList> getBeers(Integer pageNumber, Integer pageSize, String beerName, BeerStyle beerStyle, boolean showInventoryOnHand) {
+    public Mono<BeerPagedList> getBeers(Integer pageNumber, Integer pageSize, String beerName, BeerStyle beerStyle, Boolean showInventoryOnHand) {
         return webClient.get()
-                .uri(properties.getBeerV1Path())
+                .uri(uriBuilder -> uriBuilder.path(properties.getBeerV1Path())
+                        .queryParamIfPresent("pageNumber", Optional.ofNullable(pageNumber))
+                        .queryParamIfPresent("pageSize", Optional.ofNullable(pageSize))
+                        .queryParamIfPresent("beerName", Optional.ofNullable(beerName))
+                        .queryParamIfPresent("beerStyle", Optional.ofNullable(beerStyle))
+                        .queryParamIfPresent("showInventoryOnHand", Optional.ofNullable(showInventoryOnHand))
+                        .build()
+                )
                 .retrieve()
                 .bodyToMono(BeerPagedList.class);
     }

@@ -36,6 +36,28 @@ class BeerClientImplTest {
     }
 
     @Test
+    void getBeersPageSize10() {
+        Mono<BeerPagedList> beerPagedListMono = beerClient.getBeers(
+                1, 10, null, null, false
+        );
+
+        var result = beerPagedListMono.block();
+        assertThat(result).isNotNull();
+        assertThat(result.getContent().size()).isEqualTo(10);
+    }
+
+    @Test
+    void getBeersNoRecords() {
+        Mono<BeerPagedList> beerPagedListMono = beerClient.getBeers(
+                10, 20, null, null, false
+        );
+
+        var result = beerPagedListMono.block();
+        assertThat(result).isNotNull();
+        assertThat(result.getContent().size()).isEqualTo(0);
+    }
+
+    @Test
     void createBeer() {
     }
 
