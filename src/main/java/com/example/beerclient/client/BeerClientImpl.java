@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
@@ -16,6 +17,9 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class BeerClientImpl implements BeerClient {
+
+    private final WebClient webClient;
+
     @Override
     public Mono<Page<Beer>> getBeers(Integer pageNumber, Integer pageSize, String beerName, BeerStyle beerStyle, boolean showInventoryOnHand) {
         return null;
