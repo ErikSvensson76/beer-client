@@ -4,6 +4,8 @@ import com.example.beerclient.model.Beer;
 import com.example.beerclient.model.BeerCommand;
 import com.example.beerclient.model.BeerStyle;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
@@ -15,7 +17,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class BeerClientImpl implements BeerClient {
     @Override
-    public Mono<List<Beer>> getBeers(Integer pageNumber, Integer pageSize, String beerName, BeerStyle beerStyle, boolean showInventoryOnHand) {
+    public Mono<Page<Beer>> getBeers(Integer pageNumber, Integer pageSize, String beerName, BeerStyle beerStyle, boolean showInventoryOnHand) {
         return null;
     }
 
