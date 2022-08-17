@@ -2,6 +2,7 @@ package com.example.beerclient.client;
 
 import com.example.beerclient.model.Beer;
 import com.example.beerclient.model.BeerCommand;
+import com.example.beerclient.model.BeerPagedList;
 import com.example.beerclient.model.BeerStyle;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +13,7 @@ import java.util.UUID;
 
 public interface BeerClient {
 
-    Mono<Page<Beer>> getBeers(
+    Mono<BeerPagedList> getBeers(
             Integer pageNumber,
             Integer pageSize,
             String beerName,
