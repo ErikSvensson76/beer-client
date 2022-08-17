@@ -17,7 +17,7 @@ public interface BeerClient {
 
     Mono<ResponseEntity<?>> updateBeer(BeerCommand beerCommand);
 
-    Mono<Beer> getBeerById(UUID beerId, boolean showInventoryOnHand);
+    Mono<Beer> getBeerById(UUID beerId, Boolean showInventoryOnHand);
 
     Mono<ResponseEntity<?>> deleteBeer(UUID beerId);
 
